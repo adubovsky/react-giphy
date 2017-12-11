@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter, Link, Route, IndexRoute } from 'react-router-dom';
+
 import './App.css';
+
+import ExplorePage from './pages/Explore';
+import RandomPage from './pages/Random';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <BrowserRouter>
+          <Fragment>
+            <header className="App-header">
+              <h1>Giphy Explorer</h1>
+              <ul>
+                <li><Link to="/">I'm feeling lucky</Link></li>
+                <li><Link to="/explore">Explore</Link></li>
+              </ul>
+            </header>
+            <section className="App-page">
+              <Route exact path="/" component={RandomPage} />
+              <Route path="/explore" component={ExplorePage}/>
+            </section>
+          </Fragment>
+        </BrowserRouter>
       </div>
     );
   }
