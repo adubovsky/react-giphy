@@ -17,11 +17,19 @@ export class RandomPage extends Component {
     this.props.stopTimer();
   }
 
+  toggleTimer() {
+    if (this.props.timerStarted) {
+      this.props.stopTimer();
+    } else {
+      this.props.startTimer();
+    }
+  }
+
   render() {
     return (
       <div className="Random">
         <p>
-          <Countdown time={this.props.interval}/> {this.props.loading ? <span>(Loading...)</span> : ''}
+          <Countdown time={this.props.timerStarted ? this.props.interval : 0}/> {this.props.loading ? <span>(Loading...)</span> : ''}
         </p>
         <p>
           <button type="button"
@@ -29,8 +37,8 @@ export class RandomPage extends Component {
             + 1s
           </button>
           <button type="button"
-                  onClick={() => this.props.stopTimer()}>
-            Stop
+                  onClick={() => this.toggleTimer()}>
+            {this.props.timerStarted ? 'Stop' : 'Start'}
           </button>
           <button type="button"
                   onClick={() => this.props.changeInterval(this.props.interval - 1)}
